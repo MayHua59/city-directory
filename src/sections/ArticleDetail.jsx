@@ -69,8 +69,8 @@ const [isFavorite, setIsFavorite] = useState(false);
           variant="body1" 
           sx={{ 
             whiteSpace: 'pre-line',
-            lineHeight: 1.6, // Added line height
-            letterSpacing: '0.5px' // Added letter spacing
+            lineHeight: 1.6, 
+            letterSpacing: '0.5px' 
           }}
         >
           {cleanDescription}

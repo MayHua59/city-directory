@@ -14,3 +14,17 @@ export const fetchCategories = async () => {
     return null;
   }
 };
+
+export const fetchArticles = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/articles?project_id=1`);
+    if (!response.ok) {
+      throw new Error(`API call failed with status: ${response.status}`);
+    }
+    const data = await response.json();
+    return   data.data ;
+  } catch (error) {
+    console.error("Failed to fetch articles:", error);
+    return null;
+  }
+};

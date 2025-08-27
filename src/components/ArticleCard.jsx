@@ -1,13 +1,18 @@
-
-
 'use client';
 
 import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 
+const stripHtmlTags = (html) => {
+  if (!html) return '';
+  return html.replace(/<[^>]*>?/gm, '');
+};
+
 export function ArticleCard({ article }) {
-  
-  const imageUrl = "https://placehold.co/150x100/EFEFEF/999999?text=Article";
+  const imageUrl = "/images/1.jfif";
+
+  const cleanDescription = stripHtmlTags(article.description);
+  const truncatedDescription = cleanDescription.substring(0, 100) + '...';
 
   return (
     <Card
@@ -23,6 +28,8 @@ export function ArticleCard({ article }) {
           transform: 'translateY(-2px)',
           boxShadow: 4,
         },
+         height: 120, // Set a fixed height for the card
+    alignItems: 'stretch',
       }}
     >
       <Box
@@ -30,8 +37,9 @@ export function ArticleCard({ article }) {
         src={imageUrl}
         alt="Article Cover"
         sx={{
-          width: 150,
-          height: 100,
+          width: '40%', 
+          
+          height: '100%',
           borderTopLeftRadius: 12,
           borderBottomLeftRadius: 12,
           objectFit: 'cover',
@@ -42,7 +50,7 @@ export function ArticleCard({ article }) {
           {article.title}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-          {article.description.substring(0, 100)}...
+          {truncatedDescription}
         </Typography>
       </CardContent>
     </Card>

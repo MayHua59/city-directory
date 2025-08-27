@@ -1,7 +1,7 @@
 
 import { Typography, Box, Container } from '@mui/material';
 import { CategoryCard } from '@/components/CategoryCard';
-
+import Link from 'next/link';
 
 export function CategoryList({ categories }) {
   if (!categories || categories.length === 0) {
@@ -17,7 +17,14 @@ export function CategoryList({ categories }) {
   return (
     <Box sx={{ mt: 4 }}>
       {categories.map((category) => (
-        <CategoryCard key={category.id} category={category} />
+        <Link 
+          key={category.id} 
+          href={`/categories/${category.id}`} 
+          passHref
+          style={{ textDecoration: 'none' }}
+        >
+          <CategoryCard category={category} />
+        </Link>
       ))}
     </Box>
   );

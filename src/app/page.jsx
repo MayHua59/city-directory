@@ -1,15 +1,15 @@
+
 import { Container, Typography, Box, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { fetchCategories, fetchArticles } from '@/lib/api';
 import {CategoryList} from '@/sections/CategoryList';
 import {ArticleList} from '@/sections/ArticleList';
+import { SeeAllButton } from '@/components/SeeAllButton';
 
 
 export default async function HomePage() {
   const articles = await fetchArticles();
   const categories = await fetchCategories();
-
-  
   if (!articles || !categories) {
     return (
       <Container maxWidth="md" sx={{ mt: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -62,12 +62,14 @@ export default async function HomePage() {
         </Accordion>
 
        
-        <Box>
-          <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+            <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold', mb: 0 }}>
             Latest Articles
           </Typography>
-          <ArticleList articles={articles} />
+          <SeeAllButton route="/articles" name="See All Articles" />
+          
         </Box>
+        <ArticleList articles={articles} />
       </Container>
     </Box>
   );

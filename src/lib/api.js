@@ -2,6 +2,8 @@
 const API_BASE_URL = "https://mohnyin.com/api/v1";
 export const fetchCategories = async () => {
   try {
+    // simulate network delay
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     const response = await fetch(`${API_BASE_URL}/categories?project_id=1`);
     if (!response.ok) {
       throw new Error(`API call failed with status: ${response.status}`);

@@ -19,6 +19,8 @@ export const fetchCategories = async () => {
 
 export const fetchArticles = async () => {
   try {
+    // simulate network delay
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     const response = await fetch(`${API_BASE_URL}/articles?project_id=1`);
     if (!response.ok) {
       throw new Error(`API call failed with status: ${response.status}`);

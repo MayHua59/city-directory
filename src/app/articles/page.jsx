@@ -7,6 +7,7 @@ import {SearchBar} from '@/components/SearchBar';
 import { fetchArticles } from '@/lib/api';
 import { CategoryTags } from '@/components/CategoryTags';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import Loading from '@/components/Loading';
 
 export default function ArticlesPage() {
   const [articles, setArticles] = useState(null);
@@ -52,10 +53,7 @@ export default function ArticlesPage() {
         alignItems: 'center',
       }}
     >
-      <CircularProgress />
-      <Typography variant="h5" color="text.secondary" mt={2}>
-        Loading articles...
-      </Typography>
+    <Loading/>
     </Container>
     );
   }
@@ -97,6 +95,7 @@ export default function ArticlesPage() {
       />
       <SearchBar onSearch={setSearchTerm} />
       <ArticleList articles={filteredArticles} />
+      
     </Container>
   );
 }

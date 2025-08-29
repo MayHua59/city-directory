@@ -5,6 +5,7 @@ import { Typography, Box, Paper, Chip, Avatar, Grid, IconButton } from '@mui/mat
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
+import Link from 'next/link';
 
 const stripHtmlTags = (html) => {
   if (!html) return '';
@@ -56,12 +57,28 @@ const [isFavorite, setIsFavorite] = useState(false);
 
         {/* Category tag */}
         {article.category && (
-          <Chip 
-            label={article.category.name} 
-            color="primary" 
-            variant="outlined" 
-            sx={{ mb: 2 }}
-          />
+<Link href={`/categories/${article.category.id}`} passHref>
+<Chip 
+  label={article.category.name} 
+  color="primary" 
+  variant="outlined" 
+  sx={{ 
+    mb: 2, 
+    mt:2,
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    
+    background: 'linear-gradient(90deg, #e3e6f3 0%, #f0f4f8 100%)',
+    transition: 'background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s',
+    '&:hover': {
+      backgroundColor: 'primary.main',
+      color: '#000',
+      borderColor: 'primary.main',
+      boxShadow: '0 4px 16px rgba(60,72,88,0.18)',
+    }
+  }}
+/>
+</Link>
         )}
 
         {/* Article description */}

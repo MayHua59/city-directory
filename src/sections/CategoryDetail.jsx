@@ -6,7 +6,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {ArticleList} from '@/sections/ArticleList';
 import { useRouter } from 'next/navigation';
 
-export function CategoryDetail({ articles }) {
+export function CategoryDetail({ articles, category }) {
   const router = useRouter();
 
   const handleBack = () => {
@@ -21,7 +21,7 @@ export function CategoryDetail({ articles }) {
         </IconButton>
         </Box>
         <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 'light', textAlign: 'center' }}>
-          Articles in Category
+          Articles in this Category
         </Typography>
       
       <Box sx={{ mt: 4 }}>

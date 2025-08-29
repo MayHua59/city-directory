@@ -1,69 +1,21 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { Typography, Box, Container, CircularProgress, IconButton } from '@mui/material';
-import {ArticleList} from '@/sections/ArticleList';
-import {SearchBar} from '@/components/SearchBar';
+import { Suspense } from 'react';
 import { fetchArticles } from '@/lib/api';
-import { CategoryTags } from '@/components/CategoryTags';
+import { Container, Box, IconButton, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArticleFilters from '@/components/articles/ArticleFilters';
 import Loading from '@/components/Loading';
+import BackButton from '@/components/BackButton';
 
-export default function ArticlesPage() {
-  const [articles, setArticles] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [uniqueCategories, setUniqueCategories] = useState([]);
- const handleBack = () => {
-    window.history.back();
-  };
-  useEffect(() => {
-    const getArticles = async () => {
-      
-      const articlesData = await fetchArticles();
-      setArticles(articlesData);
-      setLoading(false);
-      if (articlesData) {
-        const categories = [...new Set(articlesData.map(article => article.category?.name).filter(Boolean))];
-        setUniqueCategories(categories);
-      }
-    };
 
-    getArticles();
-  }, []);
 
-  const filteredArticles = articles?.filter(article =>
-    article.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handleSelectCategory = (category) => {
-    setSelectedCategory(selectedCategory === category ? null : category);
-  };
-
-  if (loading) {
-    return (
-      <Container
-      maxWidth="md"
-      sx={{
-        minHeight: '60vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-    <Loading/>
-    </Container>
-    );
-  }
+export default async function ArticlesPage() {
+  const articles = await fetchArticles();
 
   if (!articles || articles.length === 0) {
     return (
       <Container maxWidth="md" sx={{ mt: 4 }}>
-         <IconButton onClick={handleBack} aria-label="back">
-          <ArrowBackIosIcon />
-        </IconButton>
+        <BackButton />
+        
         <Typography variant="h5" color="error" align="center">
           Failed to load articles. Please try again later.
         </Typography>
@@ -71,12 +23,17 @@ export default function ArticlesPage() {
     );
   }
 
+  const uniqueCategories = [
+    ...new Set(
+      articles.map(article => article.category?.name).filter(Boolean)
+    ),
+  ];
+
   return (
     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
-       <IconButton onClick={handleBack} aria-label="back" sx={{mb:4}}>
-          <ArrowBackIosIcon />
-        </IconButton>
-      <Box 
+     <BackButton />
+
+      <Box
         component="img"
         src="/images/shopping-cart.jfif"
         alt="Cover image"
@@ -85,17 +42,16 @@ export default function ArticlesPage() {
           height: 200,
           objectFit: 'cover',
           borderRadius: 2,
-          mb: 4, 
+          mb: 4,
         }}
       />
-      <CategoryTags 
-        categories={uniqueCategories} 
-        onSelectCategory={handleSelectCategory} 
-        selectedCategory={selectedCategory} 
-      />
-      <SearchBar onSearch={setSearchTerm} />
-      <ArticleList articles={filteredArticles} />
-      
+
+      <ArticleFilters uniqueCategories={uniqueCategories} articles={articles} />
+
+       {/* Suspense handles client hydration fallback */}
+      <Suspense fallback={<Loading />}>
+        <ArticleFilters uniqueCategories={uniqueCategories} articles={articles} />
+      </Suspense>
     </Container>
   );
 }

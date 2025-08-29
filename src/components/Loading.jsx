@@ -1,4 +1,3 @@
-// src/components/Loading.jsx
 "use client";
 
 import React from 'react';
@@ -18,10 +17,7 @@ const moveLeftToRight = keyframes`
   }
 `;
 
-/**
- * A simple loading component with a fancy UI.
- * It displays an icon that moves from left to right.
- */
+
 const Loading = () => {
   return (
     <Box 
@@ -34,7 +30,6 @@ const Loading = () => {
         textAlign: 'center',
       }}
     >
-      {/* Using a placeholder image from a free icon library like Flaticon */}
       <Box
         component="img"
         src="/images/chatting.png"

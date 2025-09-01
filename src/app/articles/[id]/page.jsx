@@ -1,6 +1,7 @@
 import { Typography, Box, Container } from '@mui/material';
 import {fetchArticleDetail} from '@/lib/api';
 import { ArticleDetail } from '@/sections/ArticleDetail';
+import { Favorites } from '@/components/Favorites';
 
 
 
@@ -20,6 +21,7 @@ export default async function ArticleDetailPage({ params }) {
   return (
     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
       <ArticleDetail article={article} />
+      <Favorites/>
     </Container>
   );
 }

@@ -6,6 +6,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import Link from 'next/link';
+import { Favorites } from '@/components/Favorites'
 
 const stripHtmlTags = (html) => {
   if (!html) return '';
@@ -29,9 +30,11 @@ const [isFavorite, setIsFavorite] = useState(false);
         <IconButton onClick={handleBack} aria-label="back">
           <ArrowBackIosIcon />
         </IconButton>
-        <IconButton onClick={handleToggleFavorite} aria-label="favorite">
+        {/* <IconButton onClick={handleToggleFavorite} aria-label="favorite">
           {isFavorite ? <StarIcon sx={{ color: 'gold' }} /> : <StarBorderIcon />}
-        </IconButton>
+        </IconButton> */}
+        <Favorites article={article} />
+        
       </Box>
       {/* Thumbnail or cover image */}
       {article.thumbnail && (

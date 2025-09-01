@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Typography, Box, Card, CardContent, Grid } from '@mui/material';
-import { ArticleCard } from '@/components/ArticleCard';
+import { ArticleCard } from '@/components/articles/ArticleCard';
 import Link from 'next/link';
 
 

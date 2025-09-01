@@ -121,7 +121,7 @@ export default async function ArticlesPage() {
         }}
       />
 
-      <ArticleFilters uniqueCategories={uniqueCategories} articles={articles} />
+      
 
        {/* Suspense handles client hydration fallback */}
       <Suspense fallback={<Loading />}>

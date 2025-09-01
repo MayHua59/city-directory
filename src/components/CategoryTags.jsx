@@ -11,8 +11,8 @@ export const CategoryTags = ({ categories, onSelectCategory, selectedCategory })
           clickable
           onClick={() => onSelectCategory(category)}
           color={selectedCategory === category ? 'primary' : 'default'}
-          sx={{ minWidth: { xs: 100, md: 400 },
-          height: 48, // Increase the height of the chip
+          sx={{ 
+          height: 48, 
             fontSize: '1rem',
          }}
           
